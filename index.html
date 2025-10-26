@@ -97,7 +97,7 @@
     .popup-content {
       background-color: white;
       padding: 16px;
-      padding-top: 11px;
+      padding-top: 12px;
       overflow-y: auto;
       flex: 1;
       min-height: 0;
@@ -206,7 +206,16 @@
         rotateControl: false,
         fullscreenControl: false,
         zoom: 8,
-        center: { lat: 0, lng: -58.0 }
+        center: { lat: 0, lng: -58.0 },
+        restriction: {
+          latLngBounds: {
+            north: 10,
+            south: -40,
+            east: -25,
+            west: -90
+          },
+          strictBounds: false
+        }
       });
 
       // Load GeoJSON files from the /geojsons directory
