@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacity Map</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    #territory-popup {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      width: auto;
+      max-height: calc(100% - 40px);
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      font-family: sans-serif;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      /* Default: full width on mobile */
+      max-width: none;
+    }
+
+    /* Only apply max-width on larger screens */
+    @media (min-width: 768px) {
+      #territory-popup {
+        max-width: 320px;
+      }
+    }
+
+    .popup-header {
+      background-color: #2b2b2b;
+      padding: 16px;
+      padding-bottom: 12px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .popup-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-title {
+      margin: 0 0 8px 0;
+      font-size: 22pt;
+      font-weight: 600;
+      color: white;
+      line-height: 1.2;
+      padding-right: 32px;
+    }
+
+    .popup-metadata {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12pt;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .popup-metadata .divider {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 16px;
+      padding-top: 11px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .popup-facts {
+      margin-bottom: 12px;
+      font-size: 13pt;
+      color: #5c5c5c;
+    }
+
+    .popup-leaders {
+      font-size: 13pt;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=***&loading=async&callback=initMap">
+  </script>
+
+
+  <script>
+    async function loadGeoJsonFiles(map) {
+
+      // List of GeoJSON files to load
+      const geoJsonFiles = [
+        // 'andira_marau.json',
+        // 'arawete_igarape_ipixuna.json',
+        'bau.json',
+        // 'jaragua.json',
+        'maro.json',
+        // 'munduruku_taquara.json',
+        'parque_do_xingu.json',
+        // 'pimentel_barbosa.json',
+        // 'uru_eu_wau_wau.json',
+        'vale_do_javari.json',
+        // 'yanomami.json'
+      ];
+
+
+      // Andira Marau
+      // Arawete Igarapé Ipixuna
+      // Baú
+      // Jaraguá
+      // Maró
+      // Mundurukú Taquara
+      // Parque do Xingu
+      // Pimentel Barbosa
+      // Uru-Eu-Wau-Wau
+      // Vale do Javari
+      // Yanomami
+
+      try {
+        // Fetch all GeoJSON files in parallel
+        const promises = geoJsonFiles.map(file =>
+          fetch(`geojsons/${file}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Failed to load ${file}: ${response.statusText}`);
+              }
+              return response.json();
+            })
+            .catch(error => {
+              console.error(`Error loading ${file}:`, error);
+              return null;
+            })
+        );
+
+        const geoJsonDataArray = await Promise.all(promises);
+
+        // Add each valid GeoJSON to the map
+        geoJsonDataArray.forEach((geoJson, index) => {
+          if (geoJson) {
+            map.data.addGeoJson(geoJson);
+          }
+        });
+
+        // Fit map bounds to show all loaded features
+        const bounds = new google.maps.LatLngBounds();
+        map.data.forEach(feature => {
+          feature.getGeometry().forEachLatLng(latLng => {
+            bounds.extend(latLng);
+          });
+        });
+        map.fitBounds(bounds);
+
+      } catch (error) {
+        console.error('Error loading GeoJSON files:', error);
+      }
+    }
+
+    function initMap() {
+      // Initialize map centered on Brazil (will auto-adjust after loading data)
+      const map = new google.maps.Map(document.getElementById('map'), {
+        mapTypeId: 'hybrid',
+        zoomControl: true,
+        cameraControl: false,
+        mapTypeControl: false,
+        scaleControl: true,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        zoom: 8,
+        center: { lat: 0, lng: -58.0 }
+      });
+
+      // Load GeoJSON files from the /geojsons directory
+      loadGeoJsonFiles(map);
+
+      // Style the polygons
+      map.data.setStyle({
+        fillColor: '#AD6DEF',
+        fillOpacity: 0.5,
+        strokeColor: '#AD6DEF',
+        strokeWeight: 2
+      });
+
+      // Create popup div
+      const popupDiv = document.createElement('div');
+      popupDiv.id = 'territory-popup';
+
+      // Add popup to map container
+      document.getElementById('map').appendChild(popupDiv);
+
+      // Hide popup when clicking on map background
+      map.addListener('click', function () {
+        popupDiv.style.display = 'none';
+      });
+
+      // Show popup on click
+      map.data.addListener('click', function (event) {
+        const name = event.feature.getProperty('name');
+        const facts = event.feature.getProperty('facts');
+        const leaders = event.feature.getProperty('leaders');
+        const population_size = event.feature.getProperty('population_size');
+        const area = event.feature.getProperty('area');
+
+        // Update popup content
+        popupDiv.innerHTML = `
+          <div class="popup-header">
+            <button class="popup-close-btn">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white"/>
+              </svg>
+            </button>
+            <h2 class="popup-title">${name}</h2>
+            <div class="popup-metadata">
+              <span>Area: ${area}</span>
+              <span class="divider">|</span>
+              <span>Population: ${population_size}</span>
+            </div>
+          </div>
+          
+          <div class="popup-content">
+            <div class="popup-facts">${facts}</div>
+            <div class="popup-leaders"><strong>Leaders:</strong> ${leaders}</div>
+          </div>
+        `;
+
+        // Show the popup
+        popupDiv.style.display = 'flex';
+
+        // Center and fit the map to the clicked territory
+        const bounds = new google.maps.LatLngBounds();
+        event.feature.getGeometry().forEachLatLng(latLng => {
+          bounds.extend(latLng);
+        });
+        map.fitBounds(bounds);
+
+        // Add close button handler
+        const closeBtn = popupDiv.querySelector('.popup-close-btn');
+        closeBtn.addEventListener('click', function () {
+          popupDiv.style.display = 'none';
+        });
+      });
+
+      // Add hover effect
+      map.data.addListener('mouseover', function (event) {
+        map.data.overrideStyle(event.feature, {
+          fillOpacity: 0.6,
+          strokeWeight: 3
+        });
+      });
+
+      map.data.addListener('mouseout', function (event) {
+        map.data.revertStyle();
+      });
+    }
+  </script>
+</body>
+
+</html>
