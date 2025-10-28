@@ -96,15 +96,13 @@
 
     .popup-content {
       background-color: #f6f6f6;
-      padding: 24px;
-      overflow-y: auto;
       flex: 1;
       min-height: 0;
       position: relative;
+      overflow: hidden;
     }
 
-    .popup-content::before {
-      content: '';
+    .popup-content-background {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -118,27 +116,28 @@
       height: 100%;
     }
 
+    .popup-content-scroll {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 24px;
+      padding-bottom: 200px;
+      overflow-y: auto;
+      z-index: 1;
+    }
+
     .popup-facts {
       margin-bottom: 48px;
       font-size: 13pt;
       color: #5c5c5c;
-      position: relative;
-      z-index: 1;
-    }
-
-    .popup-leaders {
-      font-size: 13pt;
-      color: #333;
-      position: relative;
-      z-index: 1;
     }
 
     .person-card {
       display: flex;
       gap: 24px;
       margin-bottom: 32px;
-      position: relative;
-      z-index: 1;
     }
 
     .person-info {
@@ -354,8 +353,12 @@
           </div>
           
           <div class="popup-content">
-            <div class="popup-facts">${facts}</div>
-            ${peopleHtml}
+            <div class="popup-content-background"></div>
+            <div class="popup-content-scroll">
+              <div class="popup-facts">${facts}</div>
+              <div style="margin-bottom: 32px; text-align: center; font-size: 12pt; font-weight: 500; color: #333; font-style: italic;">The defenders</div>
+              ${peopleHtml}
+            </div>
           </div>
         `;
 
