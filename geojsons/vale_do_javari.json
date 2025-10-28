@@ -2098,14 +2098,14 @@
         "people": [
           {
             "name": "Chief Tapi Yawalapiti",
-            "title": "Leader",
+            "title": "South Xingu",
             "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
             "image": "assets/images/tapi_01.webp"
           },
           {
-            "name": "Jane Doe",
-            "title": "Leader",
-            "bio": "Jane Doe is a software engineer at Google.",
+            "name": "Raoni Metuktire",
+            "title": "North Xingu",
+            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
             "image": "assets/images/raoni_01.webp"
           }
         ]
