@@ -538,13 +538,22 @@
         "name": "Andira Marau",
         "area": "788,528 km²",
         "population_size": 100,
-        "leaders": [
-          "John Doe",
-          "Jane Doe"
+        "people": [
+          {
+            "name": "Chief Tapi Yawalapiti",
+            "title": "Leader",
+            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
+            "image": "assets/images/tapi_01.webp"
+          },
+          {
+            "name": "Jane Doe",
+            "title": "Leader",
+            "bio": "Jane Doe is a software engineer at Google.",
+            "image": "assets/images/raoni_01.webp"
+          }
         ],
         "facts": "Andira Marau lands have a large concentration of niobium."
-      },
-      "id": "andira_marau"
+      }
     }
   ]
 }

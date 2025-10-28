@@ -52,8 +52,8 @@
 
     .popup-header {
       background-color: #2b2b2b;
-      padding: 16px;
-      padding-bottom: 12px;
+      padding: 24px;
+      padding-bottom: 16px;
       position: relative;
       flex-shrink: 0;
     }
@@ -74,7 +74,7 @@
     }
 
     .popup-title {
-      margin: 0 0 8px 0;
+      margin-bottom: 12px;
       font-size: 22pt;
       font-weight: 600;
       color: white;
@@ -95,9 +95,8 @@
     }
 
     .popup-content {
-      background-color: white;
-      padding: 16px;
-      padding-top: 12px;
+      background-color: #f6f6f6;
+      padding: 24px;
       overflow-y: auto;
       flex: 1;
       min-height: 0;
@@ -120,7 +119,7 @@
     }
 
     .popup-facts {
-      margin-bottom: 12px;
+      margin-bottom: 48px;
       font-size: 13pt;
       color: #5c5c5c;
       position: relative;
@@ -132,6 +131,59 @@
       color: #333;
       position: relative;
       z-index: 1;
+    }
+
+    .person-card {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .person-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .person-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .person-name {
+      font-size: 13pt;
+      font-weight: 600;
+      color: #383838;
+    }
+
+    .person-title {
+      font-size: 12pt;
+      font-style: italic;
+      color: #696969;
+    }
+
+    .person-bio {
+      color: #383838;
+      font-size: 13pt;
+      font-weight: 400;
+    }
+
+    .person-image-container {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .person-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -265,9 +317,25 @@
       map.data.addListener('click', function (event) {
         const name = event.feature.getProperty('name');
         const facts = event.feature.getProperty('facts');
-        const leaders = event.feature.getProperty('leaders');
+        const people = event.feature.getProperty('people') || [];
         const population_size = event.feature.getProperty('population_size');
         const area = event.feature.getProperty('area');
+
+        // Generate HTML for people cards
+        const peopleHtml = people.map(person => `
+          <div class="person-card">
+            <div class="person-info">
+              <div class="person-header">
+                <div class="person-name">${person.name}</div>
+                <div class="person-title">${person.title}</div>
+              </div>
+              <div class="person-bio">${person.bio}</div>
+            </div>
+            <div class="person-image-container">
+              <img src="${person.image}" alt="${person.name}">
+            </div>
+          </div>
+        `).join('');
 
         // Update popup content
         popupDiv.innerHTML = `
@@ -287,7 +355,7 @@
           
           <div class="popup-content">
             <div class="popup-facts">${facts}</div>
-            <div class="popup-leaders"><strong>Leaders:</strong> ${leaders}</div>
+            ${peopleHtml}
           </div>
         `;
 
