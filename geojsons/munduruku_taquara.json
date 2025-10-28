@@ -1078,11 +1078,21 @@
         "name": "Mundurukú Taquara",
         "area": "25,323 km²",
         "population_size": 100,
-        "leaders": [
-          "John Doe",
-          "Jane Doe"
-        ],
-        "facts": "Andira Marau lands have a large concentration of niobium."
+        "facts": "Mundurukú Taquara was one of the first territories to be demarcated by the Brazilian government in the 1980s. Since then, the territory has been the subject of illegal logging and land grabbing.",
+        "people": [
+          {
+            "name": "Chief Tapi Yawalapiti",
+            "title": "South Xingu",
+            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
+            "image": "assets/images/tapi_01.webp"
+          },
+          {
+            "name": "Raoni Metuktire",
+            "title": "North Xingu",
+            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
+            "image": "assets/images/raoni_01.webp"
+          }
+        ]
       },
       "id": "munduruku_taquara"
     }

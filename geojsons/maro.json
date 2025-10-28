@@ -2006,11 +2006,21 @@
         "name": "Maró",
         "area": "42,373 km²",
         "population_size": 100,
-        "leaders": [
-          "John Doe",
-          "Jane Doe"
-        ],
-        "facts": "Andira Marau lands have a large concentration of niobium."
+        "facts": "Maró faces the threat of illegal logging and land grabbing. The territory is home to the Munduruku people, who are one of the largest indigenous groups in the region.",
+        "people": [
+          {
+            "name": "Chief Tapi Yawalapiti",
+            "title": "South Xingu",
+            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
+            "image": "assets/images/tapi_01.webp"
+          },
+          {
+            "name": "Raoni Metuktire",
+            "title": "North Xingu",
+            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
+            "image": "assets/images/raoni_01.webp"
+          }
+        ]
       },
       "id": "maro"
     }
