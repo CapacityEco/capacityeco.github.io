@@ -2093,20 +2093,14 @@
       "properties": {
         "name": "Vale do Javari",
         "area": "8.54 Million km²",
-        "population_size": 100,
-        "facts": "Vale do Javari is a vast region of the Amazon rainforest that is home to a diverse range of indigenous peoples. It is known for its rich biodiversity and unique culture.",
+        "population_size": 7000,
+        "facts": "The Vale do Javari is plagued by constant invasions from miners, hunters, and illegal fishers. Its remote borderlands are marked by armed conflict and the pressures of drug trafficking, making daily life dangerous for local communities. Recurrent health crises—especially among isolated peoples—add another layer of threat to this fragile Amazonian stronghold.",
         "people": [
           {
-            "name": "Chief Tapi Yawalapiti",
-            "title": "South Xingu",
-            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
-            "image": "assets/images/tapi_01.webp"
-          },
-          {
-            "name": "Raoni Metuktire",
-            "title": "North Xingu",
-            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
-            "image": "assets/images/raoni_01.webp"
+            "name": "Enoque Marubo",
+            "title": null,
+            "bio": "Enoque Marubo is one of the main leaders of the Vale do Javari, in the far west of the Brazilian Amazon, and the president of the Kapyvanaway Association, which represents the Marubo people and works to protect Indigenous territories and isolated peoples. Nationally and internationally recognized, he leads initiatives in autonomous territorial monitoring, legal defense, and diplomatic advocacy in favor of Indigenous sovereignty and the preservation of the Amazon rainforest.",
+            "image": null
           }
         ]
       },

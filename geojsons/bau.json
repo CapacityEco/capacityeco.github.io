@@ -701,20 +701,14 @@
       "properties": {
         "name": "Baú",
         "area": "1.54 Million km²",
-        "population_size": 672,
-        "facts": "Baú is a vast region of the Amazon rainforest that is home to a diverse range of indigenous peoples. It is known for its rich biodiversity and unique culture.",
+        "population_size": 2500,
+        "facts": "The Baú territory is under threat from logging and gold mining, which harm biodiversity and contaminate rivers. Ongoing land grabbing adds further pressure on the land and community.",
         "people": [
           {
-            "name": "Chief Tapi Yawalapiti",
-            "title": "South Xingu",
-            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
-            "image": "assets/images/tapi_01.webp"
-          },
-          {
-            "name": "Raoni Metuktire",
-            "title": "North Xingu",
-            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
-            "image": "assets/images/raoni_01.webp"
+            "name": "Bep-Y Kayapó",
+            "title": null,
+            "bio": "Bep-Y has participated in important discussions with governmental bodies, such as the National Indigenous Fund (FUNAI) and the Ministry of Health, to demand rights and fair treatment for his people, including the demarcation of their lands and the management of indigenous health systems.",
+            "image": null
           }
         ]
       },

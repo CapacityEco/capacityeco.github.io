@@ -132,7 +132,8 @@
     .popup-facts {
       margin-bottom: 48px;
       font-size: 13pt;
-      color: #5c5c5c;
+      line-height: 1.4;
+      color: #383838;
     }
 
     .person-card {
@@ -169,6 +170,7 @@
     .person-bio {
       color: #383838;
       font-size: 13pt;
+      line-height: 1.4;
       font-weight: 400;
     }
 
@@ -203,8 +205,8 @@
       const geoJsonFiles = [
         // 'andira_marau.json',
         // 'arawete_igarape_ipixuna.json',
-        'bau.json',
         'balaio.json',
+        'bau.json',
         // 'jaragua.json',
         'maro.json',
         'munduruku_taquara.json',
@@ -278,17 +280,19 @@
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false,
+        // maxZoom: 15,
+        minZoom: 5,
         zoom: 8,
         center: { lat: 0, lng: -58.0 },
-        restriction: {
-          latLngBounds: {
-            north: 10,
-            south: -40,
-            east: -25,
-            west: -90
-          },
-          strictBounds: false
-        }
+        // restriction: {
+        //   latLngBounds: {
+        //     north: 10,
+        //     south: -40,
+        //     east: -25,
+        //     west: -90
+        //   },
+        //   strictBounds: false
+        // }
       });
 
       // Load GeoJSON files from the /geojsons directory
@@ -328,13 +332,15 @@
             <div class="person-info">
               <div class="person-header">
                 <div class="person-name">${person.name}</div>
-                <div class="person-title">${person.title}</div>
+                ${person.title ? `<div class="person-title">${person.title}</div>` : ''}
               </div>
               <div class="person-bio">${person.bio}</div>
             </div>
+            ${person.image ? `
             <div class="person-image-container">
-              <img src="${person.image}" alt="${person.name}">
-            </div>
+                <img src="${person.image}" alt="${person.name}">
+              </div>
+            ` : ''}
           </div>
         `).join('');
 

@@ -1077,20 +1077,14 @@
       "properties": {
         "name": "Munduruku-Taquara",
         "area": "25,323 km²",
-        "population_size": 253,
-        "facts": "Munduruku-Taquara was one of the first territories to be demarcated by the Brazilian government in the 1980s. Since then, the territory has been the subject of illegal logging and land grabbing.",
+        "population_size": 1500,
+        "facts": "The Munduruku-Taquara territory faces ongoing threats from illegal gold mining, which brings mercury pollution to the Tapajós and Teles Pires rivers—harming both people and wildlife. Hydroelectric dam projects also put delicate river ecosystems at risk, while territorial conflicts and violence remain a daily reality for the community as they defend their ancestral lands.",
         "people": [
           {
-            "name": "Chief Tapi Yawalapiti",
-            "title": "South Xingu",
-            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
-            "image": "assets/images/tapi_01.webp"
-          },
-          {
-            "name": "Raoni Metuktire",
-            "title": "North Xingu",
-            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
-            "image": "assets/images/raoni_01.webp"
+            "name": "Chief Abimael Munduruku",
+            "title": null,
+            "bio": "A young Indigenous leader promoting territorial defense, cultural mapping, and the preservation of sacred sources of water. Advocates for the right to self-determination and collective governance.",
+            "image": null
           }
         ]
       },

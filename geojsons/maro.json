@@ -2006,19 +2006,13 @@
         "name": "Maró",
         "area": "42,373 km²",
         "population_size": 239,
-        "facts": "Maró faces the threat of illegal logging and land grabbing. The territory is home to the Munduruku people, who are one of the largest indigenous groups in the region.",
+        "facts": "The Maró territory faces the constant threat of illegal logging and incursions by land grabbers, while hydroelectric dam projects loom as a danger to ancestral lands. Local rivers, so vital to the community, have become tainted by industrial waste, making daily life and traditional practices more precarious.",
         "people": [
           {
-            "name": "Chief Tapi Yawalapiti",
-            "title": "South Xingu",
-            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
-            "image": "assets/images/tapi_01.webp"
-          },
-          {
-            "name": "Raoni Metuktire",
-            "title": "North Xingu",
-            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
-            "image": "assets/images/raoni_01.webp"
+            "name": "Chief Dada Borari",
+            "title": null,
+            "bio": "Historic leader of the Maró Indigenous Territory and a pioneer of self-demarcation in the Amazon. Internationally recognized for defending the Arapiuns River and combating illegal deforestation through community-based monitoring networks.",
+            "image": null
           }
         ]
       },

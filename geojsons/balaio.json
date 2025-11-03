@@ -469,20 +469,14 @@
       "properties": {
         "name": "Balaio",
         "area": "2,570 km²",
-        "population_size": 328,
-        "facts": "Balaio is a vast region of the Amazon rainforest that is home to a diverse range of indigenous peoples. It is known for its rich biodiversity and unique culture.",
+        "population_size": 1000,
+        "facts": "The Balaio territory faces significant challenges from illegal mining activities, putting both the environment and local livelihoods at risk. Its proximity to the border exposes the territory to persistent trafficking and security threats. In addition, climate change is disrupting traditional hunting and fishing cycles, making it harder for the community to sustain its way of life.",
         "people": [
           {
-            "name": "Chief Tapi Yawalapiti",
-            "title": "South Xingu",
-            "bio": "Tireless and determined, cacique Tapi Yawalapiti is undoubtedly one of the most emblematic contemporary representatives of the fight for the Amazon and its indigenous peoples.",
-            "image": "assets/images/tapi_01.webp"
-          },
-          {
-            "name": "Raoni Metuktire",
-            "title": "North Xingu",
-            "bio": "Chief Raoni Metuktire is a renowned Indigenous leader of the Kayapó people in Brazil, widely known for his efforts to protect the Amazon rainforest and Indigenous rights.",
-            "image": "assets/images/raoni_01.webp"
+            "name": "Alvaro Tukano",
+            "title": null,
+            "bio": "Writer, diplomat, and intellectual, founder of the Union of Indigenous Nations (UNI). One of Brazil's foremost Indigenous thinkers, he currently works on intercultural.",
+            "image": null
           }
         ]
       },
