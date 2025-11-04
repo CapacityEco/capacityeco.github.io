@@ -721,7 +721,7 @@
       "properties": {
         "name": "Pimentel Barbosa",
         "area": "328,966 km²",
-        "population_size": 100,
+        "population_size": "100",
         "leaders": [
           "John Doe",
           "Jane Doe"

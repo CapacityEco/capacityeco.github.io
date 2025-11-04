@@ -961,7 +961,7 @@
       "properties": {
         "name": "Yanomami",
         "area": "9.66 Million km²",
-        "population_size": 100,
+        "population_size": "100",
         "leaders": [
           "John Doe",
           "Jane Doe"

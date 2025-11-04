@@ -837,7 +837,7 @@
       "properties": {
         "name": "Uru-Eu-Wau-Wau",
         "area": "1.86 Million km²",
-        "population_size": 100,
+        "population_size": "100",
         "leaders": [
           "John Doe",
           "Jane Doe"

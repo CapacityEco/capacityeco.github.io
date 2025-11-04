@@ -1633,7 +1633,7 @@
       "properties": {
         "name": "Jaraguá",
         "area": "532 km²",
-        "population_size": 100,
+        "population_size": "100",
         "leaders": [
           "John Doe",
           "Jane Doe"

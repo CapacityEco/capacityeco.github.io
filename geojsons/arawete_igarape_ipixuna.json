@@ -481,7 +481,7 @@
       "properties": {
         "name": "Arawete Igarapé Ipixuna",
         "area": "940,900 km²",
-        "population_size": 100,
+        "population_size": "100",
         "leaders": [
           "John Doe",
           "Jane Doe"
