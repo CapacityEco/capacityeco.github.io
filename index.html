@@ -255,38 +255,145 @@
           }
         });
 
-        // Create Advanced markers at the first coordinate of each territory
+        // Create Advanced markers at the center of each territory
+        const markers = [];
         map.data.forEach(feature => {
           const geometry = feature.getGeometry();
 
-          // Get the first coordinate from the geometry
+          // Calculate the center of the geometry
           if (geometry.getType() === 'Polygon') {
-            const coordinates = geometry.getAt(0); // Get outer ring
-            if (coordinates && coordinates.getLength() > 0) {
-              const firstCoord = coordinates.getAt(0);
-              const territoryName = feature.getProperty('name') || 'Territory';
+            const bounds = new google.maps.LatLngBounds();
+            geometry.forEachLatLng(latLng => {
+              bounds.extend(latLng);
+            });
+            const center = bounds.getCenter();
+            const territoryName = feature.getProperty('name') || 'Territory';
 
-              // Create custom marker content
-              const markerContent = document.createElement('div');
-              markerContent.style.backgroundColor = 'white';
-              markerContent.style.border = '2px solid gray';
-              markerContent.style.padding = '4px 8px';
-              markerContent.style.fontSize = '14px';
-              markerContent.style.color = 'black';
-              markerContent.style.fontFamily = 'sans-serif';
-              markerContent.style.whiteSpace = 'nowrap';
-              markerContent.style.borderRadius = '4px';
-              markerContent.textContent = territoryName;
+            // Create custom marker content
+            const markerContent = document.createElement('div');
+            markerContent.style.backgroundColor = 'white';
+            markerContent.style.border = '2px solid gray';
+            markerContent.style.padding = '4px 8px';
+            markerContent.style.fontSize = '14px';
+            markerContent.style.color = 'black';
+            markerContent.style.fontFamily = 'sans-serif';
+            markerContent.style.whiteSpace = 'nowrap';
+            markerContent.style.borderRadius = '4px';
+            markerContent.textContent = territoryName;
 
-              // Create an Advanced marker
-              const marker = new google.maps.marker.AdvancedMarkerElement({
-                map: map,
-                position: firstCoord,
-                content: markerContent,
-                title: territoryName
+            // Create an Advanced marker
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+              map: map,
+              position: center,
+              content: markerContent,
+              title: territoryName
+            });
+
+            // Store marker for later control
+            markers.push(marker);
+
+            // Add click handler to marker (same behavior as geometry click)
+            marker.addListener('click', () => {
+              const name = feature.getProperty('name');
+              const facts = feature.getProperty('facts');
+              const people = feature.getProperty('people') || [];
+              const population_size = feature.getProperty('population_size');
+              const area = feature.getProperty('area');
+
+              // Get the popup div
+              const popupDiv = document.getElementById('territory-popup');
+
+              // Generate HTML for people cards
+              const peopleHtml = people.map(person => `
+                <div class="person-card">
+                  <div class="person-info">
+                    <div class="person-header">
+                      <div class="person-name">${person.name}</div>
+                      ${person.title ? `<div class="person-title">${person.title}</div>` : ''}
+                    </div>
+                    <div class="person-bio">${person.bio}</div>
+                  </div>
+                  ${person.image ? `
+                  <div class="person-image-container">
+                      <img src="${person.image}" alt="${person.name}">
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('');
+
+              // Update popup content
+              popupDiv.innerHTML = `
+                <div class="popup-header">
+                  <button class="popup-close-btn">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white"/>
+                    </svg>
+                  </button>
+                  <h2 class="popup-title">${name}</h2>
+                  <div class="popup-metadata">
+                    <span>Area: ${area}</span>
+                    <span class="divider">|</span>
+                    <span>Population: ${population_size}</span>
+                  </div>
+                </div>
+                
+                <div class="popup-content">
+                  <div class="popup-content-background"></div>
+                  <div class="popup-content-scroll">
+                    <div class="popup-facts">${facts}</div>
+                    <!-- <div style="margin-bottom: 24px; text-align: center; font-size: 12pt; font-weight: 500; color: #333; font-style: italic;">The defenders</div> -->
+                    ${peopleHtml}
+                  </div>
+                </div>
+              `;
+
+              // Show the popup
+              popupDiv.style.display = 'flex';
+
+              // Center and fit the map to the clicked territory
+              const bounds = new google.maps.LatLngBounds();
+              geometry.forEachLatLng(latLng => {
+                bounds.extend(latLng);
               });
-            }
+              map.fitBounds(bounds);
+
+              // Add close button handler
+              const closeBtn = popupDiv.querySelector('.popup-close-btn');
+              closeBtn.addEventListener('click', function () {
+                popupDiv.style.display = 'none';
+              });
+            });
           }
+        });
+
+        // Function to hide all markers
+        function hideMarkers() {
+          markers.forEach(marker => {
+            marker.map = null;
+          });
+        }
+
+        // Function to show all markers
+        function showMarkers() {
+          markers.forEach(marker => {
+            marker.map = map;
+          });
+        }
+
+        // Function to update marker visibility based on zoom level
+        function updateMarkerVisibility() {
+          const zoom = map.getZoom();
+
+          if (zoom > 10) {
+            hideMarkers();
+          } else {
+            showMarkers();
+          }
+        }
+
+        // Add zoom listener to hide/show markers
+        map.addListener('zoom_changed', () => {
+          updateMarkerVisibility();
         });
 
         // Fit map bounds to show all loaded features
