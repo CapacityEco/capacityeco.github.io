@@ -194,7 +194,7 @@
   <div id="map"></div>
 
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXkI4JsedOJzbdyzoWFF1yA7qaa_FZWLQ&loading=async&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXkI4JsedOJzbdyzoWFF1yA7qaa_FZWLQ&loading=async&libraries=marker&callback=initMap">
     </script>
 
 
@@ -255,6 +255,40 @@
           }
         });
 
+        // Create Advanced markers at the first coordinate of each territory
+        map.data.forEach(feature => {
+          const geometry = feature.getGeometry();
+
+          // Get the first coordinate from the geometry
+          if (geometry.getType() === 'Polygon') {
+            const coordinates = geometry.getAt(0); // Get outer ring
+            if (coordinates && coordinates.getLength() > 0) {
+              const firstCoord = coordinates.getAt(0);
+              const territoryName = feature.getProperty('name') || 'Territory';
+
+              // Create custom marker content
+              const markerContent = document.createElement('div');
+              markerContent.style.backgroundColor = 'white';
+              markerContent.style.border = '2px solid gray';
+              markerContent.style.padding = '4px 8px';
+              markerContent.style.fontSize = '14px';
+              markerContent.style.color = 'black';
+              markerContent.style.fontFamily = 'sans-serif';
+              markerContent.style.whiteSpace = 'nowrap';
+              markerContent.style.borderRadius = '4px';
+              markerContent.textContent = territoryName;
+
+              // Create an Advanced marker
+              const marker = new google.maps.marker.AdvancedMarkerElement({
+                map: map,
+                position: firstCoord,
+                content: markerContent,
+                title: territoryName
+              });
+            }
+          }
+        });
+
         // Fit map bounds to show all loaded features
         const bounds = new google.maps.LatLngBounds();
         map.data.forEach(feature => {
@@ -272,6 +306,7 @@
     function initMap() {
       // Initialize map centered on Brazil (will auto-adjust after loading data)
       const map = new google.maps.Map(document.getElementById('map'), {
+        mapId: '74bc3b851ade2a7d8c4c3922',
         mapTypeId: 'hybrid',
         zoomControl: true,
         cameraControl: false,
